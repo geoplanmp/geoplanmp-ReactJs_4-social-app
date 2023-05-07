@@ -1,0 +1,10 @@
+.addPost form {
+    display: inline-block;
+    margin: auto;
+    justify-content: center;
+
+}
+
+.textarea {    
+    width: 300px;
+}

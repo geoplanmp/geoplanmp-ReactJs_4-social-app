@@ -2,9 +2,15 @@ import './Post.css'
 
 import { useState } from "react";
 
+import AddPost from './AddPost';
+
 const Post = (props) => {
+
+    const [postContent, setPostContent] = useState(null);
     
-    const [likesCount, setLikesCount] = useState(props.post.likes.length)
+    const [likesCount, setLikesCount] = useState(props.post.likes.length);
+
+    
     
     return (
         <div className="post">
@@ -18,8 +24,12 @@ const Post = (props) => {
                 </div>
                 <div className="postContent">{props.post.content}</div>
                 <div className="likes">{likesCount}</div>
-            </div>           
+            </div>
+            {/* <AddPost getTextArea={getTextArea}/>            */}
+            {/* {setPostContent = {setPostContent}} */}
+            
         </div>
+        
     );
 }
 

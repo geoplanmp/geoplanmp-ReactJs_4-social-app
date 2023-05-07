@@ -8,7 +8,7 @@ const AppNav = (props) => {
     const handleLogOut = () => {
             axios.post("http://akademia108.pl/api/social-app/user/logout")
             .then((req)=>{
-                console.log(req);
+                console.log(req.data);
                 if (req.data.message) {
                     props.setUser(null);
                     localStorage.setItem('user', null);
@@ -16,6 +16,8 @@ const AppNav = (props) => {
                 
             })
             .catch ((error) => {
+                props.setUser(null);
+                localStorage.setItem('user', null);
                 console.error(error);
             });
         
@@ -34,7 +36,7 @@ const AppNav = (props) => {
                     <Link to="/signup">Sign Up</Link>              
                 </li>}
                 {props.user && <li>
-                    <Link to="/" onClick={handleLogOut}>Log out</Link>              
+                    <Link to="/" onClick={handleLogOut}>Logout</Link>              
                 </li>}
             </ul>
         </nav>

@@ -3,9 +3,10 @@ import './Home.css';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Post from "../components/Post";
+import AddPost from '../components/AddPost';
 
 
-const Home = () => {
+const Home = (props) => {
 
     const [posts, setPosts] = useState([]);
     
@@ -33,16 +34,17 @@ const Home = () => {
 
     useEffect(()=>{
         getLatestPosts();
-    },[]);
+    },[props.user]);
 
     console.log(posts);
     return (
-        <div className="home">
+        <div className="home">            
             <div className="postList">
+            <AddPost />
                 {posts.map((post) => {
                      return <Post post={post} key={post.id} />
                 })}
-                <button className ="btn loadMore" onClick={getNextPosts}>Load more</button>
+                <button className ="btn loadMore" onClick={getNextPosts}>Load more</button>                
             </div>           
         </div>    
     );

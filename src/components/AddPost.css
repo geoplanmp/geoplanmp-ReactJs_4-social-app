@@ -1,10 +1,11 @@
-.addPost form {
-    display: inline-block;
+.addPost {
+    max-width: 600px;
+    display: flex;
+    justify-content: right;
     margin: auto;
-    justify-content: center;
-
+    padding-bottom: 5px;  
 }
 
-.textarea {    
+.addPost .textarea {    
     width: 300px;
 }

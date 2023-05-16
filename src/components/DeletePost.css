@@ -1,0 +1,11 @@
+.deletePost {
+    /* max-width: 600px;
+    margin: auto;
+    display: flex;
+    justify-content: flex-end; */
+    max-width: 600px;
+    display: flex;
+    justify-content: right;
+    margin: auto;
+}
+

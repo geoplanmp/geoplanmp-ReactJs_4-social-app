@@ -46,6 +46,13 @@ const Home = (props) => {
         });
     };
 
+    const removePost = (postID) => {
+        // console.log(postID);
+        setPosts(posts.filter(post => 
+            post.id !== postID))
+        
+    }
+
     useEffect(()=>{
         getLatestPosts();
     },[props.user]);
@@ -56,7 +63,7 @@ const Home = (props) => {
             <AddPost getPrevPosts={getPrevPosts}/>                       
             <div className="postList">            
                 {posts.map((post) => {
-                     return <Post post={post} key={post.id} />               
+                     return <Post post={post} key={post.id} removePost = {removePost}/>               
                 })}                 
                 <button className ="btn loadMore" onClick={getNextPosts}>Load more</button>                
             </div>           

@@ -20,7 +20,7 @@ const Post = (props) => {
                 <div className="postContent">{props.post.content}</div>
                 <div className="likes">{likesCount}</div>
             </div>
-            <DeletePost />            
+            <DeletePost postId={props.post.id} removePost = {props.removePost}/>            
         </div>
         
     );

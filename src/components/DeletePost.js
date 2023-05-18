@@ -3,16 +3,13 @@ import './DeletePost.css';
 
 const DeletePost = (props) => {
     
-    const deletePost = (event) => {
-        event.preventDefault();
-
+    const deletePost = (id) => {
+        
         axios.post("https://akademia108.pl/api/social-app/post/delete", {
-            post_id: props.postId
+            post_id: id
         })
         .then((req)=>{
-            console.log(req);
-            // props.getPrevPosts();
-            // setPostContent("");
+            console.log(req);            
             props.removePost(req.data.post_id);
             
         })
@@ -23,7 +20,7 @@ const DeletePost = (props) => {
     
     return (
         <div className="deletePost">
-            <button className="btn deleteBtn" onClick = {(e) => deletePost(e)}>Delete</button>
+            <button className="btn deleteBtn" onClick = {() => deletePost(props.postId)}>Delete</button>
         </div>
     );
 };

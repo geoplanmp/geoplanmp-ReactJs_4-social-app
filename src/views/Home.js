@@ -49,9 +49,9 @@ const Home = (props) => {
     const removePost = (postID) => {
         // console.log(postID);
         setPosts(posts.filter(post => 
-            post.id !== postID))
+            post.id !== postID));
         
-    }
+    };
 
     useEffect(()=>{
         getLatestPosts();

@@ -9,3 +9,7 @@
     margin: auto;
 }
 
+.deletepost button window.confirm {
+    color: red;
+}
+

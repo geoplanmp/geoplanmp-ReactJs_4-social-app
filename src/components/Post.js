@@ -7,6 +7,8 @@ const Post = (props) => {
 
  const [likesCount, setLikesCount] = useState(props.post.likes.length);
 
+ 
+
     return (
         <div className="post">
             <div className="avatar">
@@ -20,7 +22,7 @@ const Post = (props) => {
                 <div className="postContent">{props.post.content}</div>
                 <div className="likes">{likesCount}</div>
             </div>
-            {props.user &&<DeletePost postId={props.post.id} removePost={props.removePost}/>}            
+            {props.post.user.username===props.user?.username &&<DeletePost postId={props.post.id} removePost={props.removePost} />}            
         </div>
         
     );

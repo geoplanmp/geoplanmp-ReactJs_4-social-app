@@ -16,19 +16,14 @@ const DeletePost = (props) => {
         })
         .then((req)=>{
             console.log(req);
-            props.removePost(req.data.post_id);
-              
-           
+            props.removePost(req.data.post_id);            
         })
 
         .catch ((error) => {
             console.error(error);
         });                               
     }
-
-
-    
-    
+        
     return (
         <div className="deletePost">
             <button className="btn deleteBtn" onClick = {() => setdeleteModalDisplay(true)}>Delete</button>            

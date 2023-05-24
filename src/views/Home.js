@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Post from "../components/Post";
 import AddPost from '../components/AddPost';
+import DeletePost from '../components/DeletePost';
 
 
 const Home = (props) => {
@@ -49,10 +50,12 @@ const Home = (props) => {
     const removePost = (postID) => {
         // console.log(postID);
         setPosts(posts.filter(post => 
-            post.id !== postID));
-        
+            post.id !== postID)); 
     };
-
+      
+   
+    
+      
     useEffect(()=>{
         getLatestPosts();
     },[props.user]);
@@ -63,10 +66,11 @@ const Home = (props) => {
             <AddPost getPrevPosts={getPrevPosts}/>                       
             <div className="postList">            
                 {posts.map((post) => {
-                     return <Post post={post} key={post.id} removePost={removePost} user={props.user}/>               
+                     return <Post post={post} key={post.id} removePost={removePost} user={props.user}/>                                        
                 })}                 
                 <button className ="btn loadMore" onClick={getNextPosts}>Load more</button>                
-            </div>           
+            </div>
+                               
         </div>    
     );
 };

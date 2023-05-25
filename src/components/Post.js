@@ -31,11 +31,8 @@ const Post = (props) => {
                     <div className="date">{props.post.user.created_at.substring(0, 10)}</div>                    
                 </div>
                 <div className="postContent">{props.post.content}</div>
-                <div className="likes">
-                    
-                    
+                <div className="likes">                                       
                     {props.user && (<button className='btn' onClick={() => likePost(props.post.id, doesUserLiked)}>{doesUserLiked ? "Dislike" : "Like"}</button>)}
-                    
                     {likeCount}
                 </div>
                 {props.post.user.username===props.user?.username &&<DeletePost postId={props.post.id} removePost={props.removePost} />}

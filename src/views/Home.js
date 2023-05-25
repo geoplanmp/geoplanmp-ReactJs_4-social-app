@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Post from "../components/Post";
 import AddPost from '../components/AddPost';
 import DeletePost from '../components/DeletePost';
+import FallowRecommedations from '../components/FallowRecommendations';
 
 
 const Home = (props) => {
@@ -63,14 +64,16 @@ const Home = (props) => {
     console.log(posts);
     return (
         <div className="home">
-            <AddPost getPrevPosts={getPrevPosts}/>                       
+            <AddPost getPrevPosts={getPrevPosts}/>
+            <div className="postList">
+                <FallowRecommedations />
+            </div>                                   
             <div className="postList">            
                 {posts.map((post) => {
                      return <Post post={post} key={post.id} removePost={removePost} user={props.user}/>                                        
                 })}                 
                 <button className ="btn loadMore" onClick={getNextPosts}>Load more</button>                
-            </div>
-                               
+            </div>                               
         </div>    
     );
 };

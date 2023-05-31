@@ -4,7 +4,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Post from "../components/Post";
 import AddPost from '../components/AddPost';
-import DeletePost from '../components/DeletePost';
 import FallowRecommedations from '../components/FallowRecommendations';
 
 
@@ -66,7 +65,7 @@ const Home = (props) => {
         <div className="home">
             <AddPost getPrevPosts={getPrevPosts}/>
             <div className="postList">
-                <FallowRecommedations />
+                <FallowRecommedations user={props.user} setPosts={setPosts}/>
             </div>                                   
             <div className="postList">            
                 {posts.map((post) => {

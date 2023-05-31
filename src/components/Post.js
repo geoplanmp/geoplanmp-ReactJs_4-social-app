@@ -36,13 +36,8 @@ const Post = (props) => {
                     {likeCount}
                 </div>
                 {props.post.user.username===props.user?.username &&<DeletePost postId={props.post.id} removePost={props.removePost} />}
-            </div>
-              
-            
-                
-                     
-        </div>
-        
+            </div>                    
+        </div>        
     );
 }
 

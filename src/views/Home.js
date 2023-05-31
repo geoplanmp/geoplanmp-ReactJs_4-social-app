@@ -7,6 +7,7 @@ import AddPost from '../components/AddPost';
 import FallowRecommedations from '../components/FallowRecommendations';
 
 
+
 const Home = (props) => {
 
     const [posts, setPosts] = useState([]);
@@ -52,6 +53,12 @@ const Home = (props) => {
         setPosts(posts.filter(post => 
             post.id !== postID)); 
     };
+
+    const showFallowedPost = (postLeaderID) => {
+        console.log(postLeaderID);
+        setPosts(posts.filter(post => 
+            post.user.id === postLeaderID)); 
+    };
       
    
     
@@ -63,9 +70,9 @@ const Home = (props) => {
     console.log(posts);
     return (
         <div className="home">
-            <AddPost getPrevPosts={getPrevPosts}/>
+            <AddPost getPrevPosts={getPrevPosts} user={props.user}/>
             <div className="postList">
-                <FallowRecommedations user={props.user} setPosts={setPosts}/>
+                <FallowRecommedations user={props.user} setPosts={setPosts} showFallowedPost={showFallowedPost}/>
             </div>                                   
             <div className="postList">            
                 {posts.map((post) => {

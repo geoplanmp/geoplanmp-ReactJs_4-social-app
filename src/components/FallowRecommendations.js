@@ -22,7 +22,7 @@ const FallowRecommedations = (props) => {
             leader_id: id
         }).then((req)=> {
             console.log(req);
-            // props.setPosts(req.) 
+            props.showFallowedPost(req.data.leader_id);
         })
         .catch ((error) => {
             console.error(error);
@@ -32,7 +32,7 @@ const FallowRecommedations = (props) => {
 
     useEffect(() => {
         getRecommedations();
-    }, []);
+    }, [props.posts]);
 
     return (        
         <div className={props.user && `${`recommedationsPanel`}`}>                    

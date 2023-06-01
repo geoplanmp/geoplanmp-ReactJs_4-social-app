@@ -12,15 +12,25 @@ const Home = (props) => {
 
     const [posts, setPosts] = useState([]);
     
+    // const [postsUser, setPostsUser] = useState((posts.filter(post => 
+    //         post.user.id === props.user.id)));
+
+    // console.log(postsUser);
+    
     const getLatestPosts = () => {
         axios.post("https://akademia108.pl/api/social-app/post/latest")
-        .then((req)=>{
+        .then((req)=>{            
             setPosts(req.data);
-            console.log(req);
+            // getUserPost();
+            console.log(req);            
         })
         .catch ((error) => {
             console.error(error);
-        });
+        })
+        // const getUserPost = () => {
+        //     props.user &&
+        //         setPosts(posts.filter(post => 
+        //     post.user.id === props.user.id))}         
     };
 
     const getNextPosts = () => {
@@ -58,10 +68,7 @@ const Home = (props) => {
         console.log(postLeaderID);
         setPosts(posts.filter(post => 
             post.user.id === postLeaderID)); 
-    };
-      
-   
-    
+    };          
       
     useEffect(()=>{
         getLatestPosts();

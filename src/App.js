@@ -10,7 +10,7 @@ function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
   axios.defaults.headers.common['Authorization'] = "Bearer" + (user ? user.jwt_token : "");
-
+  // console.log(user);
   return (
     <div className="App">
       <AppNav user={user} setUser={setUser}/>

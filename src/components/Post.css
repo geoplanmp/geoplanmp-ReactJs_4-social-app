@@ -34,5 +34,17 @@
 }
 
 .post .postData .likes {
-    text-align: right;   
+    text-align: right;
+    display: flex-end;
+    flex-direction: row;
+    > * {
+        margin: 0px 2px;
+    }
+
 }
+
+/* .unfollow {    
+    text-align: right;
+    margin: 0;
+    
+} */

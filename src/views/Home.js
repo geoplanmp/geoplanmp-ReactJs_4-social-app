@@ -12,11 +12,6 @@ const Home = (props) => {
 
     const [posts, setPosts] = useState([]);
     
-    // const [postsUser, setPostsUser] = useState((posts.filter(post => 
-    //         post.user.id === props.user.id)));
-
-    // console.log(postsUser);
-    
     const getLatestPosts = () => {
         axios.post("https://akademia108.pl/api/social-app/post/latest")
         .then((req)=>{            
@@ -26,11 +21,7 @@ const Home = (props) => {
         })
         .catch ((error) => {
             console.error(error);
-        })
-        // const getUserPost = () => {
-        //     props.user &&
-        //         setPosts(posts.filter(post => 
-        //     post.user.id === props.user.id))}         
+        })        
     };
 
     const getNextPosts = () => {
@@ -64,11 +55,6 @@ const Home = (props) => {
             post.id !== postID)); 
     };
 
-    const showFallowedPost = (postLeaderID) => {
-        console.log(postLeaderID);
-        setPosts(posts.filter(post => 
-            post.user.id === postLeaderID)); 
-    };          
       
     useEffect(()=>{
         getLatestPosts();
@@ -79,11 +65,11 @@ const Home = (props) => {
         <div className="home">
             <AddPost getPrevPosts={getPrevPosts} user={props.user}/>
             <div className="postList">
-                <FallowRecommedations user={props.user} setPosts={setPosts} showFallowedPost={showFallowedPost}/>
+                <FallowRecommedations user={props.user} setPosts={setPosts} getLatestPosts={getLatestPosts} posts={posts}/>
             </div>                                   
             <div className="postList">            
                 {posts.map((post) => {
-                     return <Post post={post} key={post.id} removePost={removePost} user={props.user}/>                                        
+                     return <Post post={post} key={post.id} removePost={removePost} user={props.user} getLatestPosts={getLatestPosts}/>                                        
                 })}                 
                 <button className ="btn loadMore" onClick={getNextPosts}>Load more</button>                
             </div>                               

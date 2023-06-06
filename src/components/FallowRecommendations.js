@@ -21,15 +21,15 @@ const FallowRecommedations = (props) => {
         axios.post("https://akademia108.pl/api/social-app/follows/follow", {
             leader_id: id
         }).then((req)=> {
-            console.log(req);
-            props.showFallowedPost(req.data.leader_id);
+            // console.log(req);
+            props.getLatestPosts();
+            console.log(recommedations);
         })
         .catch ((error) => {
             console.error(error);
         });
     };
     
-
     useEffect(() => {
         getRecommedations();
     }, [props.posts]);
@@ -44,7 +44,7 @@ const FallowRecommedations = (props) => {
                                 </div>)}
                                 {props.user && (<div className="author">{recommedation.username}</div>)}
                                 {props.user && (<button className="btn" key={recommedation.id} onClick={() => fallow(recommedation.id)} >Follow</button>)}
-                            </div>                                                                                                                                    
+                            </div>                                                                                                                             
                     );                 
                 })}                
         </div>

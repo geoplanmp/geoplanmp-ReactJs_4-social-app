@@ -1,11 +1,23 @@
-.addPost {
+.addPostForm {
+    box-sizing: border-box;
     max-width: 600px;
-    display: flex;
-    justify-content: right;
+    border: 1px solid black;    
+    border-radius: 5px;  
     margin: auto;
-    padding-bottom: 5px;  
+    padding: 5px;  
+}
+
+.addPost form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    
 }
 
 .addPost .textarea {    
-    width: 300px;
+    width: 100%;
+}
+
+.addPost .addPostBtn { 
+    margin: 2px; 
 }

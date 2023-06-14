@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import './SignUp.css';
 import { Navigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const SignUp = (props) => {
 
@@ -18,6 +19,9 @@ const SignUp = (props) => {
         email: '',
         confirmPassword: ''
     });
+
+    const [signUpMessage, setSignUpMessage] = useState('');
+    const [signUpDone, setSignUpDone] = useState(false);
 
     const validate = () => {
         let validationErrors = {
@@ -53,7 +57,7 @@ const SignUp = (props) => {
 
         /* Email */
 
-        if ( !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email.trim())) {
+        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email.trim())) {
             validationErrors.email = true;
             setErrors(prevErrors => {
                 return {
@@ -69,11 +73,61 @@ const SignUp = (props) => {
             })
         }
 
+        /* Password */
+
+        if (formData.password.trim().length < 6) {
+            validationErrors.password = true;
+            setErrors(prevErrors => {
+                return {
+                    ...prevErrors, password: "Password should have at least 6 characters",
+                }
+            })
+        } else if (!/^[^\s]*$/.test(formData.password.trim())) {
+            validationErrors.password = true;
+            setErrors(prevErrors => {
+                return {
+                    ...prevErrors, password: "Password should'n have empty characters",
+                }
+            })
+        } else if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(formData.password.trim())) {
+            validationErrors.password = true;
+            setErrors(prevErrors => {
+                return {
+                    ...prevErrors, password: "Password must contain one of charts: ! # @ $ %",
+                }
+            })
+        } else {
+            validationErrors.password = false;
+            setErrors(prevErrors => {
+                return {
+                    ...prevErrors, password: "",
+                }
+            })
+        }
+
+        /* Confirm password */
+
+        if (formData.password.trim() !== formData.confirmPassword.trim()) {
+            validationErrors.confirmPassword = true;
+            setErrors(prevErrors => {
+                return {
+                    ...prevErrors, confirmPassword: "Password shoud be the same",
+                }
+            })
+        } else {
+            validationErrors.confirmPassword = false;
+            setErrors(prevErrors => {
+                return {
+                    ...prevErrors, confirmPassword: "",
+                }
+            })
+        }
+
         return (!validationErrors.username &&
             !validationErrors.email &&
             !validationErrors.password &&
             !validationErrors.confirmPassword
-            );
+        );          
     };
 
     const handleInputChange = (event) => {                
@@ -93,17 +147,29 @@ const SignUp = (props) => {
             return
         }
 
-        console.log("wysyłam");
+        // console.log("wysyłam");
 
-        // axios.post("https://akademia108.pl/api/social-app/user/signup", {
-        //     username: formData.username,
-        //     password: formData.password,
-        //     email: formData.email,
-        //     confirmPassword: formData.confirmPassword
-        // })
-        // .then((res)=>{
-        //          console.log(res.data);   
-        // })
+        axios.post("https://akademia108.pl/api/social-app/user/signup", {
+            username: formData.username,            
+            email: formData.email,
+            password: formData.password            
+        })
+        .then((res)=>{
+            console.log(res.data);
+                
+            let resData = res.data;
+
+            if (resData.signedup) {
+                setSignUpMessage('Account created');
+                setSignUpDone(true);
+            } else {
+                if (resData.message.username) {
+                    setSignUpMessage(resData.message.username[0])
+                } else if (resData.message.email) {
+                    setSignUpMessage(resData.message.email[0])
+                }
+            }
+        })
     }
 
     // console.log(formData);
@@ -112,13 +178,21 @@ const SignUp = (props) => {
         <div className="signUp">
             {props.user && <Navigate to="/" />}
             <form onSubmit={handleSubmit}>
+                {signUpMessage && <h2>{signUpMessage}</h2>}
                 <input type="text" name="username" placeholder="User name" onChange={handleInputChange} />
                 {errors.username && <p>{errors.username}</p>}
                 <input type="email" name="email" placeholder="Email" onChange={handleInputChange} />
                 {errors.email && <p>{errors.email}</p>}
                 <input type="password" name="password" placeholder="Password" onChange={handleInputChange} />
+                {errors.password && <p>{errors.password}</p>}
                 <input type="password" name="confirmPassword" placeholder="Confirm password" onChange={handleInputChange} />
-                <button className='btn'>Sign Up</button>
+                {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                <button className='btn' disabled={signUpDone}>Sign Up</button>
+                {signUpDone && (
+                    <div>
+                        <Link to='/login' className='btn'> Go to login </Link>
+                    </div>
+                )}
             </form>
         </div>
     )
